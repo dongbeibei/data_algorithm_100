@@ -40,7 +40,7 @@ bool cmp(pair<int,int> a, pair<int,int>b);
 
 int main(void)
 {
-	int		a, b, x, i;
+	int		a, b, x, i, m, n, temp;
 	vector<pair<int,int> > interval;
 	ifstream in("input.txt");
 	while(in>>a>>b)
@@ -57,17 +57,42 @@ int main(void)
 	int end = interval[0].second;
 	int right, cover;
 
+	m = n = 0;
+	temp = 0;
 	for(i=1 ; i<interval.size() ; i++)
 	{
-		right = end>interval[i].second ? interval[i].second : end;
-		cover = right-interval[i].first>=0 ? right-interval[i].first+1 : 0;
+		if(end > interval[i].second)
+		{
+			right = interval[i].second;
+		}
+		else
+			right = end;
+		//right = end>interval[i].second ? interval[i].second : end;
+		if(right-interval[i].first>=0)
+		{
+			cover = right - interval[i].first + 1;
+		}
+		else
+			cover = 0;
+		//cover = right-interval[i].first>=0 ? right-interval[i].first+1 : 0;
 		if(cover > maxcover)
+		{
 			maxcover = cover;
+			m = i;
+			n = temp;
+		}
 		if(interval[i].second > end)
+		{
 			end = interval[i].second;
+			temp = i;
+		}
 	}
 
 	cout<<maxcover<<endl;
+	cout<<m<<endl;
+	cout<<n<<endl;
+	cout<<"["<<interval[m].first<<","<<interval[m].second<<"]"<<endl;
+	cout<<"["<<interval[n].first<<","<<interval[n].second<<"]"<<endl;
 	
 	return 0;
 }
