@@ -13,37 +13,28 @@
 
 using namespace std;
 
-//void my_swap(char *start, char *end);
-char *reverse(char *str);
+void my_swap(char &a, char &b);
+void reverse(char *str);
 
 int main(void)
 {
-	const char *first = "I am a student.";
-	char *test, *result;
+	char test[] = "I am a student.";
 
-	test = const_cast<char *>(first);
-	result = reverse(test);
+	reverse(test);
 
-//	cout<<"result:\n\t"<<result<<endl;
+	cout<<"result:\n\t"<<test<<endl;
 
 	return 0;
 }
-/*
-void my_swap(char *a, char *b)
-{
-	char temp;
-	cout<<"a:"<<*a<<endl;
-	cout<<"b:"<<*b<<endl;
-	temp = *a;
-	cout<<"temp:"<<temp<<endl;
-	*a++ = *b;
-	*b-- = temp;
 
-	cout<<"a:"<<a<<endl;
-	cout<<"b:"<<b<<endl;
+void my_swap(char &a, char &b)
+{
+	char temp = a;
+	a = b;
+	b = temp;
 }
-*/
-char *reverse(char *str)
+
+void reverse(char *str)
 {
 	char	*start, *end, *temp;
 	char	ch;
@@ -54,9 +45,9 @@ char *reverse(char *str)
 	end -= 1;
 	while(start < end)
 	{
-		ch = *start;
-		*start++ = *end;
-		*end-- = ch;
+		my_swap(*start, *end);
+		start++;
+		end--;
 	}
 
 	end = start = str;
@@ -68,9 +59,9 @@ char *reverse(char *str)
 			end -= 1;
 			while(start < end)
 			{
-				ch = *start;
-				*start++ = *end;
-				*end-- = ch;
+				my_swap(*start, *end);
+				start++;
+				end--;
 			}
 
 			start = end = temp+1;
@@ -78,14 +69,13 @@ char *reverse(char *str)
 
 		end++;
 	}
-
+/*
 	end -= 1;
 	while(start < end)
 	{
-		ch = *start;
-		*start++ = *end;
-		*end-- = ch;
+		swap(start, end);
+		start++;
+		end--;
 	}
-
-	return str;
+*/
 }

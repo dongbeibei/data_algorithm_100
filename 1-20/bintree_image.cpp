@@ -43,8 +43,8 @@ int i=0;
 #define LEN 14
 
 void init_tree(BSTreeNode *&root, int *array);
-void reverse_tree(BSTreeNode *root);
-void reverse_tree_1(BSTreeNode *root);
+void reverse_tree_recu(BSTreeNode *root);
+void reverse_tree_stack(BSTreeNode *root);
 void Pre_visit(BSTreeNode *root);
 void del_tree(BSTreeNode *root);
 
@@ -59,11 +59,15 @@ int main(void)
 	Pre_visit(root);
 	cout<<endl;
 	//cout<<"111\n";
-	reverse_tree_1(root);
+	reverse_tree_recu(root);
 	//cout<<"222\n";
 	Pre_visit(root);
 	cout<<endl;
 	//cout<<"333\n";
+	reverse_tree_stack(root);
+	Pre_visit(root);
+	cout<<endl;
+	//cout<<"444\n";
 	del_tree(root);
 
 	return 0;
@@ -92,7 +96,7 @@ void init_tree(BSTreeNode *&root, int *array)
 
 }
 
-void reverse_tree(BSTreeNode *root)
+void reverse_tree_recu(BSTreeNode *root)
 {	
 	if(!(root->m_pLeft || root->m_pRight))
 		return;
@@ -107,11 +111,11 @@ void reverse_tree(BSTreeNode *root)
 		temp = NULL;
 	}
 
-	reverse_tree(root->m_pLeft);
-	reverse_tree(root->m_pRight);
+	reverse_tree_recu(root->m_pLeft);
+	reverse_tree_recu(root->m_pRight);
 }
 
-void reverse_tree_1(BSTreeNode * root)
+void reverse_tree_stack(BSTreeNode * root)
 {
 	if(root == NULL)
 		return;
@@ -120,6 +124,7 @@ void reverse_tree_1(BSTreeNode * root)
 	s.push(root);
 	while(!s.empty())
 	{
+		root = s.top();
 		s.pop();
 	
 		BSTreeNode	*temp = new BSTreeNode;
