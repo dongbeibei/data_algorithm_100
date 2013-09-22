@@ -14,6 +14,8 @@ using namespace std;
 
 
 //follow: Unit Test
+//the inner test result
+void Test(const char *name, const char *array, int exceptedResult);
 //
 void test1();
 //
@@ -32,23 +34,28 @@ int main(void)
 	return 0;
 }
 
+void Test(const char *name, const char *array, int exceptedResult)
+{
+	if(name != NULL)
+		cout<<name<<": ";
+
+	if()
+		cout<<"Passed."<<endl;
+	else
+		cout<<"Failed."<<endl;
+}
+
 void test1()
 {
-	cout<<"Test 1:\n";
-
 
 }
 
 void test2()
 {
-	cout<<"Test 2:\n";
-
 
 }
 
 void test3()
 {
-	cout<<"Test 3:\n";
-
 
 }
